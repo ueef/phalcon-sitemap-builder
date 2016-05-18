@@ -1,14 +1,14 @@
 {
-    "name": "ueef/php-sitemap-builder",
-    "type": "library",
-    "description": "",
-    "license": "MIT",
-    "require": {
-        "php": ">=5.4.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "SitemapBuilder\\": "src/"
-        }
+  "name": "ueef/php-sitemap-builder",
+  "type": "library",
+  "description": "",
+  "license": "MIT",
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "SitemapBuilder\\": "src/"
     }
+  }
 }
