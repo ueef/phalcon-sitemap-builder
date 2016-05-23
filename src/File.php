@@ -4,8 +4,9 @@ namespace SitemapBuilder {
 
     use SitemapBuilder\Exceptions\Exception;
     use SitemapBuilder\Interfaces\FileInterface;
+    use Phalcon\Extended\Attachment\File as AttachmentFile;
 
-    class File implements FileInterface
+    class File extends AttachmentFile implements FileInterface
     {
         /**
          * @var integer
@@ -15,7 +16,7 @@ namespace SitemapBuilder {
         /**
          * @var integer
          */
-        protected $path;
+        protected $temPath;
 
         /**
          * @var resource
@@ -27,6 +28,11 @@ namespace SitemapBuilder {
          */
         protected $shift = null;
 
+        /**
+         * @var string
+         */
+        protected $storageService = 'sitemaps-storage';
+
 
         public function __destruct()
         {
@@ -34,8 +40,8 @@ namespace SitemapBuilder {
                 @fclose($this->stream);
             }
 
-            if ($this->path) {
-                @unlink($this->path);
+            if (file_exists($this->temPath)) {
+                @unlink($this->temPath);
             }
         }
 
@@ -46,13 +52,13 @@ namespace SitemapBuilder {
         }
 
 
-        public function save($path)
+        public function save()
         {
-            if (false === copy($this->path, $path)) {
+            if (false === copy($this->temPath, $this->getPath())) {
                 throw new Exception('не удалось скопировать временный файл');
             }
 
-            if (unlink($this->path)) {
+            if (unlink($this->temPath)) {
                 throw new Exception('не получилось удалить временный файл');
             }
         }
@@ -60,13 +66,13 @@ namespace SitemapBuilder {
 
         public function open()
         {
-            $this->path = tempnam(sys_get_temp_dir(), 'sitemap-');
+            $this->temPath = tempnam(sys_get_temp_dir(), 'sitemap-');
 
             if (false === $this->stream) {
                 throw new Exception('не удалось создать временный файл');
             }
 
-            $this->stream = fopen($this->path, 'w');
+            $this->stream = fopen($this->temPath, 'w');
 
             if (false === $this->stream) {
                 throw new Exception('не удалось открыть временный файл на запись');

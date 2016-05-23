@@ -3,13 +3,13 @@
 namespace SitemapBuilder\Interfaces {
 
     use SitemapBuilder\Exceptions\Exception;
-
+    
     interface FileInterface
     {
         public function getSize();
 
 
-        public function save($path);
+        public function save();
 
 
         public function open();

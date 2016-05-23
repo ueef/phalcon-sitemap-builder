@@ -10,11 +10,6 @@ namespace SitemapBuilder {
     class Builder
     {
         /**
-         * @var string
-         */
-        private $dir;
-
-        /**
          * @var FileInterface
          */
         private $files = [];
@@ -25,19 +20,12 @@ namespace SitemapBuilder {
         private $current;
 
 
-        public function __construct($dir)
+        public function __construct()
         {
-            $this->setDir($dir);
             $this->next();
         }
 
-
-        public function setDir($dir)
-        {
-            $this->dir = preg_replace('/\/$/iuU', '', $dir);
-        }
-
-
+        
         public function insert(array $data)
         {
             $this->current->insert($data);
