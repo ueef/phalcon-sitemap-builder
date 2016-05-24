@@ -48,11 +48,11 @@ namespace SitemapBuilder\File {
 
         public function close()
         {
-            parent::close();
-
             $this->write(
                 '</urlset>'
             );
+
+            parent::close();
         }
 
 

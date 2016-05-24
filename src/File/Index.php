@@ -1,8 +1,9 @@
 <?php
 
-namespace SitemapBuilder {
+namespace SitemapBuilder\File {
 
     use SitemapBuilder\Exceptions\Exception;
+    use SitemapBuilder\File;
     use SitemapBuilder\Interfaces\IndexInterface;
 
     class Index extends File implements IndexInterface
@@ -25,11 +26,11 @@ namespace SitemapBuilder {
 
         public function close()
         {
-            parent::close();
-
             $this->write(
                 '</sitemapindex>'
             );
+            
+            parent::close();
         }
 
 

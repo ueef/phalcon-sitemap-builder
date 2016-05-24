@@ -6,13 +6,28 @@ namespace SitemapBuilder\Interfaces {
     
     interface FileInterface
     {
+        public function getUrl();
+
+
+        public function getPath();
+
+
+        public function getName();
+
+
         public function getSize();
+
+
+        public function setIndex($index);
 
 
         public function save();
 
 
         public function open();
+
+
+        public function clear();
 
 
         public function close();
