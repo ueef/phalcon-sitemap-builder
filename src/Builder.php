@@ -41,6 +41,7 @@ namespace SitemapBuilder {
             $this->host = $host;
             $this->prefixDir = $this->correctPath($prefixDir);
             $this->storageDir = $this->correctPath($storageDir);
+            $this->checkDir();
         }
 
 
@@ -131,6 +132,15 @@ namespace SitemapBuilder {
 
             foreach ($this->files as $file) {
                 $file->save();
+            }
+        }
+
+
+        private function checkDir()
+        {
+            $path = $this->getDirPath();
+            if (!is_dir($path) && !mkdir($path, 0777, true)) {
+                throw new Exception('не удалось создать папку ' . $path);
             }
         }
 
