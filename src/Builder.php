@@ -123,7 +123,7 @@ namespace SitemapBuilder {
 
                 foreach ($this->files as $key => $file) {
                     $file->setIndex($key + 1);
-                    $index->insert($this->host . '/' . $file->getUrl());
+                    $index->insert($this->host . $file->getUrl());
                 }
 
                 $index->close();
