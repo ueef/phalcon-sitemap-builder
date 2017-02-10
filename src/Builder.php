@@ -28,7 +28,7 @@ namespace SitemapBuilder {
         /**
          * @var FileInterface[]
          */
-        private $files = [];
+        private $files = array();
 
         /**
          * @var SitemapInterface
@@ -105,7 +105,7 @@ namespace SitemapBuilder {
 
         private function clearDir()
         {
-            foreach (array_diff(scandir($this->getDirPath()), ['.', '..']) as $file) {
+            foreach (array_diff(scandir($this->getDirPath()), array('.', '..')) as $file) {
                 $path = $this->getDirPath() . '/' . $file;
                 
                 if (!unlink($path)) {
